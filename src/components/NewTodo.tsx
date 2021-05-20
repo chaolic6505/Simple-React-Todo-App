@@ -10,8 +10,13 @@ const NewTodo: React.FC<NewTodoType> = (props) => {
 
 	const todoSubmitHandler = (event: React.FormEvent) => {
 		event.preventDefault();
-		const userInput = textInput.current!.value;
-		props.addTodo(userInput);
+		if (textInput.current!.value.trim().length !== 0) {
+			const userInput = textInput.current!.value;
+			props.addTodo(userInput);
+			textInput.current!.value = ' ';
+		} else {
+			alert('Invalid Input');
+		}
 	};
 	return (
 		<>
@@ -20,9 +25,10 @@ const NewTodo: React.FC<NewTodoType> = (props) => {
 					<Form.Label></Form.Label>
 					<Form.Control
 						ref={textInput}
-						placeholder="Todo Text"
+						placeholder="Insert Todo Text"
 						type="text"
 						id="todo-text"
+						required
 					/>
 				</Form.Group>
 				<Button variant="primary" type="submit">
