@@ -1,17 +1,22 @@
 import React from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Container from 'react-bootstrap/Container';
 
-interface TodoListProps {
-  items: {id: string, text: string}[];
-};
+interface TodoListType {
+	items: { id: string; text: string }[];
 
-const TodoList: React.FC<TodoListProps> = props => {
-  return (
-    <ul>
-      {props.items.map(todo => (
-        <li key={todo.id}>{todo.text}</li>
-      ))}
-    </ul>
-  );
+}
+
+const TodoList: React.FC<TodoListType> = ({ items }) => {
+	return (
+		<Container>
+			<ListGroup variant="flush">
+				{items.map((todo) => (
+					<ListGroup.Item key={todo.id}>{todo.text}</ListGroup.Item>
+				))}
+			</ListGroup>
+		</Container>
+	);
 };
 
 export default TodoList;
